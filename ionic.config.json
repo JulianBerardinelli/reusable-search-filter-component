@@ -1,0 +1,7 @@
+{
+  "name": "the-guitar-hub_1",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
