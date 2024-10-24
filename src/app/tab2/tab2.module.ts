@@ -6,6 +6,9 @@ import { Tab2Page } from './tab2.page';
 import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
 
 import { Tab2PageRoutingModule } from './tab2-routing.module';
+import { ReusableSearchFilterModule } from '../components/reusable-search-filter/reusable-search-filter.module';
+import { DataGridModule } from '../components/data-grid/data-grid-modal';
+
 
 @NgModule({
   imports: [
@@ -13,7 +16,9 @@ import { Tab2PageRoutingModule } from './tab2-routing.module';
     CommonModule,
     FormsModule,
     ExploreContainerComponentModule,
-    Tab2PageRoutingModule
+    Tab2PageRoutingModule,
+    ReusableSearchFilterModule,
+    DataGridModule
   ],
   declarations: [Tab2Page]
 })

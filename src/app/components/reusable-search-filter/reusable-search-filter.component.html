@@ -1,0 +1,106 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Buscar y Filtrar</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="openFilters()" fill="clear" color="primary">
+        <ion-icon name="funnel-outline"></ion-icon> Filtros
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-menu side="end" menuId="filterMenu" contentId="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Filtros</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+    <!-- Filtro por categoría -->
+    <ion-item> 
+      <ion-label>Categoría</ion-label>
+      <ion-select [(ngModel)]="selectedCategory">
+        <ion-select-option *ngFor="let category of categories" [value]="category">{{ category }}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <!-- Botón para mostrar el modal de "Desde" -->
+    <ion-item>
+      <ion-label>Desde</ion-label>
+      <ion-button id="open-from-date-modal" fill="outline">
+        {{ filterDates.fromDate ? (filterDates.fromDate | date: 'dd/MM/yyyy') : 'Seleccionar' }}
+      </ion-button>
+    </ion-item>
+
+    <!-- Modal para seleccionar la fecha "Desde" -->
+    <ion-modal trigger="open-from-date-modal" [initialBreakpoint]="1" [breakpoints]="[0, 1]">
+      <ng-template>
+        <div class="modal-content">
+          <ion-datetime 
+            [(ngModel)]="tempFromDate"
+            display-format="DD/MM/YYYY" 
+            presentation="date"
+            hour-cycle="h23"
+            locale="es-ES"
+            cancel-text="Cancelar"
+            done-text="Aceptar"
+            (ionChange)="selectFromDate()"
+          ></ion-datetime>
+        </div>
+      </ng-template>
+    </ion-modal>
+
+        <!-- Botón para mostrar el modal de "Hasta" -->
+    <ion-item>
+      <ion-label>Hasta</ion-label>
+      <ion-button id="open-to-date-modal" fill="outline">
+        {{ filterDates.toDate ? (filterDates.toDate | date: 'dd/MM/yyyy') : 'Seleccionar' }}
+      </ion-button>
+    </ion-item>
+
+    <!-- Modal para seleccionar la fecha "Hasta" -->
+    <ion-modal trigger="open-to-date-modal" [initialBreakpoint]="1" [breakpoints]="[0, 1]">
+      <ng-template>
+        <div class="modal-content">
+          <ion-datetime 
+            [(ngModel)]="tempToDate"
+            display-format="DD/MM/YYYY" 
+            presentation="date"
+            hour-cycle="h23"
+            locale="es-ES"
+            cancel-text="Cancelar"
+            done-text="Aceptar"
+            (ionChange)="selectToDate()"
+          ></ion-datetime>
+        </div>
+      </ng-template>
+    </ion-modal>
+
+    <div class="filter-buttons-container">
+        <ion-button expand="block" (click)="applyFilters()" class="filter-button">Aplicar Filtros</ion-button>
+        <ion-button expand="block" color="light" (click)="clearFilters()" class="filter-button">Limpiar Filtros</ion-button>
+    </div>
+    
+  </ion-content>
+</ion-menu>
+
+<ion-content id="main-content" class="full-height">
+  <div class="content-container">
+    <ion-searchbar [debounce]="500" (ionInput)="handleSearch($event)" animated="true"></ion-searchbar>
+
+    <div class="list-container">
+      <ng-container *ngIf="itemTemplate">
+        <ng-container *ngTemplateOutlet="itemTemplate; context: { $implicit: paginatedResults }"></ng-container>
+      </ng-container>
+    </div>
+  </div>
+
+  <div class="pagination-container">
+    <div class="pagination">
+      <ion-button [disabled]="currentPage === 1" (click)="prevPage()">Anterior</ion-button>
+      <span>Página {{ currentPage }} de {{ totalPages }}</span>
+      <ion-button [disabled]="currentPage === totalPages" (click)="nextPage()">Siguiente</ion-button>
+    </div>
+  </div>
+</ion-content>

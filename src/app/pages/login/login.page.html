@@ -1,0 +1,75 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>The Guitar Hub</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card>
+    <ion-card-content>
+      <form (ngSubmit)="login()" [formGroup]="credentials">
+        <ion-item>
+          <ion-label position="stacked">Email</ion-label>
+          <ion-input 
+            type="email" 
+            inputmode="email" 
+            formControlName="email"
+            placeholder="ejemplo@nexions.com"></ion-input>
+          <ion-note 
+            slot="error">
+            >Porfavor inserte un email válido.
+          </ion-note>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">Contraseña</ion-label>
+          <ion-input 
+            type="password" 
+            inputmode="password" 
+            formControlName="password"
+            ></ion-input>
+          <ion-note 
+            slot="error"
+            *ngIf="(password.dirty || password.touched) && password.errors">
+            > Porfavor inserte una contraseña válida.
+          </ion-note>
+        </ion-item>
+
+        <ion-button 
+          type="submit" 
+          expand="block" 
+          strong="true"
+          [disabled]="credentials.invalid">
+          Iniciar sesión
+        </ion-button>
+
+      </form>
+
+      <div class="ion-margin-top">
+        <ion-button
+          type="button" 
+          fill="outline" 
+          expand="block"
+          strong="true"
+          color="primary"
+          routerLink="register">
+          <ion-icon name="person-add" slot="start"></ion-icon>
+          Crear cuenta
+        </ion-button>
+        <ion-button 
+        type="button" 
+        fill="clear" 
+        expand="block"
+        strong="false"
+        
+        (click)="forgotPw()">
+        ¿Olvidaste tu contraseña?
+      </ion-button>
+
+
+      </div>
+
+    </ion-card-content>
+
+  </ion-card>
+</ion-content>

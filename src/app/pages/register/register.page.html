@@ -1,0 +1,53 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>The Guitar Hub</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card>
+    <ion-card-content>
+      <form (ngSubmit)="createAccount()" [formGroup]="credentials">
+        <ion-item>
+          <ion-label position="stacked">Email</ion-label>
+          <ion-input 
+            type="email" 
+            inputmode="email" 
+            formControlName="email"
+            placeholder="ejemplo@nexions.com"></ion-input>
+          <div *ngIf="email.touched && email.invalid">
+            <ion-text color="danger">Por favor inserte un email válido.</ion-text>
+          </div>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">Contraseña</ion-label>
+          <ion-input 
+            type="password" 
+            inputmode="password" 
+            formControlName="password"></ion-input>
+
+          <!-- Error para campo requerido -->
+          <div *ngIf="(password.dirty || password.touched) && password.errors?.['required']">
+            <ion-text color="danger">La contraseña es obligatoria.</ion-text>
+          </div>
+
+          <!-- Error para longitud mínima -->
+          <div *ngIf="(password.dirty || password.touched) && password.errors?.['minlength']">
+            <ion-text color="danger">La contraseña debe tener al menos 8 caracteres.</ion-text>
+          </div>
+        </ion-item>
+
+        <ion-button 
+          type="submit" 
+          expand="block" 
+          strong="true"
+          [disabled]="credentials.invalid">
+          Crear cuenta
+        </ion-button>
+
+      </form>
+    </ion-card-content>
+
+  </ion-card>
+</ion-content>
