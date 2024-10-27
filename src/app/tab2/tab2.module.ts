@@ -7,7 +7,7 @@ import { ExploreContainerComponentModule } from '../explore-container/explore-co
 
 import { Tab2PageRoutingModule } from './tab2-routing.module';
 import { ReusableSearchFilterModule } from '../components/reusable-search-filter/reusable-search-filter.module';
-import { DataGridModule } from '../components/data-grid/data-grid-modal';
+import { DataGridModule } from '../components/data-grid/data-grid.modal';
 
 
 @NgModule({

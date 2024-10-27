@@ -17,16 +17,24 @@
   </ion-header>
 
   <ion-content>
-    <!-- Filtro por categoría -->
-    <ion-item> 
+    <!-- Filtro de orden por precio (se muestra si se pasa enableOrderByPrice como prop) -->
+    <ion-item *ngIf="enableOrderByPrice">
+      <ion-label>Ordenar por precio</ion-label>
+      <ion-select [(ngModel)]="selectedOrder">
+        <ion-select-option value="asc">Menor a mayor</ion-select-option>
+        <ion-select-option value="desc">Mayor a menor</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <!-- Filtro por categoría (se muestra solo si hay categorías disponibles) -->
+    <ion-item *ngIf="categories && categories.length > 0">
       <ion-label>Categoría</ion-label>
       <ion-select [(ngModel)]="selectedCategory">
         <ion-select-option *ngFor="let category of categories" [value]="category">{{ category }}</ion-select-option>
       </ion-select>
     </ion-item>
 
-    <!-- Botón para mostrar el modal de "Desde" -->
-    <ion-item>
+    <ion-item [class.hidden]="!dateRanges || dateRanges.length === 0">
       <ion-label>Desde</ion-label>
       <ion-button id="open-from-date-modal" fill="outline">
         {{ filterDates.fromDate ? (filterDates.fromDate | date: 'dd/MM/yyyy') : 'Seleccionar' }}
@@ -37,22 +45,22 @@
     <ion-modal trigger="open-from-date-modal" [initialBreakpoint]="1" [breakpoints]="[0, 1]">
       <ng-template>
         <div class="modal-content">
-          <ion-datetime 
+          <ion-datetime
             [(ngModel)]="tempFromDate"
-            display-format="DD/MM/YYYY" 
+            display-format="DD/MM/YYYY"
             presentation="date"
             hour-cycle="h23"
             locale="es-ES"
             cancel-text="Cancelar"
             done-text="Aceptar"
-            (ionChange)="selectFromDate()"
-          ></ion-datetime>
+            (ionChange)="selectFromDate()">
+          </ion-datetime>
         </div>
       </ng-template>
     </ion-modal>
 
-        <!-- Botón para mostrar el modal de "Hasta" -->
-    <ion-item>
+    <!-- Botón para mostrar el modal de "Hasta" -->
+    <ion-item [class.hidden]="!dateRanges || dateRanges.length === 0">
       <ion-label>Hasta</ion-label>
       <ion-button id="open-to-date-modal" fill="outline">
         {{ filterDates.toDate ? (filterDates.toDate | date: 'dd/MM/yyyy') : 'Seleccionar' }}
@@ -63,25 +71,25 @@
     <ion-modal trigger="open-to-date-modal" [initialBreakpoint]="1" [breakpoints]="[0, 1]">
       <ng-template>
         <div class="modal-content">
-          <ion-datetime 
+          <ion-datetime
             [(ngModel)]="tempToDate"
-            display-format="DD/MM/YYYY" 
+            display-format="DD/MM/YYYY"
             presentation="date"
             hour-cycle="h23"
             locale="es-ES"
             cancel-text="Cancelar"
             done-text="Aceptar"
-            (ionChange)="selectToDate()"
-          ></ion-datetime>
+            (ionChange)="selectToDate()">
+          </ion-datetime>
         </div>
       </ng-template>
     </ion-modal>
 
+    <!-- Botones de aplicar y limpiar filtros -->
     <div class="filter-buttons-container">
-        <ion-button expand="block" (click)="applyFilters()" class="filter-button">Aplicar Filtros</ion-button>
-        <ion-button expand="block" color="light" (click)="clearFilters()" class="filter-button">Limpiar Filtros</ion-button>
+      <ion-button expand="block" (click)="applyFilters()" class="filter-button">Aplicar Filtros</ion-button>
+      <ion-button expand="block" color="light" (click)="clearFilters()" class="filter-button">Limpiar Filtros</ion-button>
     </div>
-    
   </ion-content>
 </ion-menu>
 

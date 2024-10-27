@@ -12,6 +12,7 @@ export class ReusableSearchFilterComponent implements OnInit, OnChanges {
   @Input() itemsPerPageOptions: number[] = [5, 10, 15];
   @Input() defaultItemsPerPage: number = 5;
   @Input() dateRanges: string[] = [];
+  @Input() enableOrderByPrice: boolean = false;
 
   @ContentChild('itemTemplate', { static: true }) itemTemplate!: TemplateRef<any>;
 
@@ -25,22 +26,24 @@ export class ReusableSearchFilterComponent implements OnInit, OnChanges {
   public searchText = '';
   public filterDates = { fromDate: '', toDate: '' }; // Para almacenar las fechas seleccionadas
   public selectedCategory = '';
+  public selectedOrder = ''; // Para el filtro de orden
 
   // Variables temporales para las fechas seleccionadas en el modal
   public tempFromDate = '';
   public tempToDate = '';
 
-  constructor(private menuCtrl: MenuController, 
-              private modalController: ModalController,
-              private loadingController: LoadingController) {} // Inyectar LoadingController
+  constructor(
+    private menuCtrl: MenuController,
+    private modalController: ModalController,
+    private loadingController: LoadingController
+  ) {}
 
   ngOnInit() {
-    this.itemsPerPage = this.defaultItemsPerPage || 10; 
+    this.itemsPerPage = this.defaultItemsPerPage || 10;
   }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['data'] && this.data.length > 0) {
-      console.log('Datos recibidos:', this.data);
       this.filteredData = [...this.data];
       this.paginate();
     }
@@ -52,27 +55,26 @@ export class ReusableSearchFilterComponent implements OnInit, OnChanges {
   }
 
   async applyFilters() {
-    // Mostrar loading
     const loading = await this.loadingController.create({
       message: 'Aplicando filtros...',
-      duration: 500, // 0.5 segundos
+      duration: 500,
     });
     await loading.present();
 
-    this.filteredData = this.data.filter(item => {
+    this.filteredData = this.data.filter((item) => {
       const matchesSearch = item.model?.toLowerCase().includes(this.searchText);
-      const matchesCategory = this.selectedCategory 
-        ? item.categorie?.toLowerCase() === this.selectedCategory.toLowerCase() 
+      const matchesCategory = this.selectedCategory
+        ? item.categorie?.toLowerCase() === this.selectedCategory.toLowerCase()
         : true;
       const matchesDateRange = this.isWithinDateRange(item);
 
       return matchesSearch && matchesCategory && matchesDateRange;
     });
-    
+
+    this.applyOrder(); // Aplicar el orden si está habilitado
     this.currentPage = 1;
     this.paginate();
 
-    // Cerrar el loading y el menú lateral
     await loading.dismiss();
     this.closeFilters();
   }
@@ -81,16 +83,15 @@ export class ReusableSearchFilterComponent implements OnInit, OnChanges {
     this.searchText = '';
     this.filterDates = { fromDate: '', toDate: '' };
     this.selectedCategory = '';
+    this.selectedOrder = '';
     this.filteredData = [...this.data];
     this.paginate();
-
-    // Cerrar el menú lateral después de limpiar los filtros
     this.closeFilters();
   }
 
   async selectFromDate() {
     this.filterDates.fromDate = this.tempFromDate;
-  
+
     const modal = await this.modalController.getTop();
     if (modal) {
       setTimeout(() => {
@@ -98,10 +99,10 @@ export class ReusableSearchFilterComponent implements OnInit, OnChanges {
       }, 100);
     }
   }
-  
+
   async selectToDate() {
     this.filterDates.toDate = this.tempToDate;
-  
+
     const modal = await this.modalController.getTop();
     if (modal) {
       setTimeout(() => {
@@ -127,10 +128,18 @@ export class ReusableSearchFilterComponent implements OnInit, OnChanges {
     }
   }
 
+  applyOrder() {
+    if (this.selectedOrder === 'asc') {
+      this.filteredData.sort((a, b) => a.price - b.price);
+    } else if (this.selectedOrder === 'desc') {
+      this.filteredData.sort((a, b) => b.price - a.price);
+    }
+  }
+
   paginate() {
     const start = (this.currentPage - 1) * this.itemsPerPage;
     const end = start + this.itemsPerPage;
-    this.paginatedResults = this.filteredData.slice(start, end);  
+    this.paginatedResults = this.filteredData.slice(start, end);
     this.totalPages = Math.ceil(this.filteredData.length / this.itemsPerPage);
   }
 

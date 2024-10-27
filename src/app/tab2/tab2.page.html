@@ -2,7 +2,8 @@
   <app-reusable-search-filter 
     [data]="guitars" 
     [categories]="guitarCategories"
-    [dateRanges]="guitarDateRanges" 
+    [dateRanges]="guitarDateRanges"
+    [enableOrderByPrice]="true"
     [itemsPerPageOptions]="[5, 10, 20]" 
     [defaultItemsPerPage]="10">
     <ng-template #itemTemplate let-items>
