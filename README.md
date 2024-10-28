@@ -42,14 +42,14 @@ The `ReusableSearchFilterComponent` works by accepting data and various configur
 
 Here is a list of all the configurable properties for the `ReusableSearchFilterComponent`:
 
-| Prop                  | Type          | Default  | Description                                                                                   |
-|-----------------------|---------------|----------|-----------------------------------------------------------------------------------------------|
-| `data`                | `any[]`       | `[]`     | Array of data items to be displayed and filtered.                                             |
-| `categories`          | `string[]`    | `[]`     | Array of categories available for filtering items.                                            |
-| `dateRanges`          | `string[]`    | `[]`     | Date range values for filtering items by date.                                                |
-| `enableOrderByPrice`  | `boolean`     | `false`  | Enables sorting by price when set to `true`.                                                  |
-| `itemsPerPageOptions` | `number[]`    | `[5,10,15]` | Options for selecting items per page in pagination.                                         |
-| `defaultItemsPerPage` | `number`      | `5`      | Default number of items to display per page.                                                  |
+| Prop                  | Type          | Default       | Required | Description                                                                                   |
+|-----------------------|---------------|---------------|----------|-----------------------------------------------------------------------------------------------|
+| `data`                | `any[]`       | `[]`         | ✔️       | Array of data items to be displayed and filtered.                                             |
+| `categories`          | `string[]`    | `[]`         | ❌       | Array of categories available for filtering items.                                            |
+| `dateRanges`          | `string[]`    | `[]`         | ❌       | Date range values for filtering items by date.                                                |
+| `enableOrderByPrice`  | `boolean`     | `false`      | ❌       | Enables sorting by price when set to `true`.                                                  |
+| `itemsPerPageOptions` | `number[]`    | `[5,10,15]`  | ❌       | Options for selecting items per page in pagination.                                           |
+| `defaultItemsPerPage` | `number`      | `5`          | ❌       | Default number of items to display per page.                                                  |
 
 ---
 
