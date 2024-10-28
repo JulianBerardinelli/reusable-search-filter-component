@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>The Guitar Hub</ion-title>
+    <ion-title>Reusable Search Filter</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -15,10 +15,9 @@
             inputmode="email" 
             formControlName="email"
             placeholder="ejemplo@nexions.com"></ion-input>
-          <ion-note 
-            slot="error">
-            >Porfavor inserte un email válido.
-          </ion-note>
+          <div *ngIf="email.touched && email.invalid">
+            <ion-text color="danger">Por favor inserte un email válido.</ion-text>
+          </div>
         </ion-item>
 
         <ion-item>
@@ -26,13 +25,17 @@
           <ion-input 
             type="password" 
             inputmode="password" 
-            formControlName="password"
-            ></ion-input>
-          <ion-note 
-            slot="error"
-            *ngIf="(password.dirty || password.touched) && password.errors">
-            > Porfavor inserte una contraseña válida.
-          </ion-note>
+            formControlName="password"></ion-input>
+
+          <!-- Error para campo requerido -->
+          <div *ngIf="(password.dirty || password.touched) && password.errors?.['required']">
+            <ion-text color="danger">La contraseña es obligatoria.</ion-text>
+          </div>
+
+          <!-- Error para longitud mínima -->
+          <div *ngIf="(password.dirty || password.touched) && password.errors?.['minlength']">
+            <ion-text color="danger">La contraseña debe tener al menos 8 caracteres.</ion-text>
+          </div>
         </ion-item>
 
         <ion-button 
@@ -42,7 +45,6 @@
           [disabled]="credentials.invalid">
           Iniciar sesión
         </ion-button>
-
       </form>
 
       <div class="ion-margin-top">
@@ -57,19 +59,14 @@
           Crear cuenta
         </ion-button>
         <ion-button 
-        type="button" 
-        fill="clear" 
-        expand="block"
-        strong="false"
-        
-        (click)="forgotPw()">
-        ¿Olvidaste tu contraseña?
-      </ion-button>
-
-
+          type="button" 
+          fill="clear" 
+          expand="block"
+          strong="false"
+          (click)="forgotPw()">
+          ¿Olvidaste tu contraseña?
+        </ion-button>
       </div>
-
     </ion-card-content>
-
   </ion-card>
 </ion-content>
