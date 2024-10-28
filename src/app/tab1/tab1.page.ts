@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-tab1',
@@ -6,20 +7,43 @@ import { Component } from '@angular/core';
   styleUrls: ['tab1.page.scss']
 })
 export class Tab1Page {
-  items = [
-    { label: 'Leche', category: 'Lácteos', date: '2024-01-10' },
-    { label: 'Jugo de Naranja', category: 'Refrescos', date: '2024-01-12' },
-    { label: 'Pan', category: 'Panadería', date: '2024-01-15' },
-    { label: 'Huevos', category: 'Lácteos', date: '2024-01-20' },
-    { label: 'Pollo', category: 'Carnes', date: '2024-01-25' },
-    { label: 'Pescado', category: 'Carnes', date: '2024-04-30' },
-    { label: 'Papas', category: 'Verduras', date: '2024-02-01' },
-    { label: 'Zanahorias', category: 'Verduras', date: '2024-02-05' },
+  userEmail: string | null = null;
+
+  public actionSheetButtons = [
+    {
+      text: 'Cerrar sesión',
+      role: 'destructive',
+      icon: 'log-out-outline',
+      handler: () => {
+        this.logout();  // Llama a la función de cierre de sesión
+      },
+    },
+    {
+      text: 'Cancelar',
+      role: 'cancel',
+      icon: 'close-outline',
+      handler: () => {
+        console.log('Cancel clicked');
+      },
+    },
   ];
 
-  categories = ['Lácteos', 'Refrescos', 'Panadería', 'Carnes', 'Verduras'];
-  
+  constructor(private authService: AuthService) {}
 
-  constructor() {}
+  ngOnInit() {
+    this.authService.getCurrentUser().subscribe((user) => {
+      if (user && typeof user !== 'boolean') {
+        this.userEmail = user.email || null;
+      } else {
+        this.userEmail = null;
+      }
+    });
+  }
 
+  logout() {
+    this.authService.signOut();
+  }
 }
+
+
+

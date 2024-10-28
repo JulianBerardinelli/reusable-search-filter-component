@@ -10,12 +10,31 @@ import { User } from '@supabase/supabase-js';
 export class Tab3Page implements OnInit {
   userEmail: string | null = null;
 
+  public actionSheetButtons = [
+    {
+      text: 'Cerrar sesión',
+      role: 'destructive',
+      icon: 'log-out-outline',
+      handler: () => {
+        this.logout();  // Llama a la función de cierre de sesión
+      },
+    },
+    {
+      text: 'Cancelar',
+      role: 'cancel',
+      icon: 'close-outline',
+      handler: () => {
+        console.log('Cancel clicked');
+      },
+    },
+  ];
+
   constructor(private authService: AuthService) {}
 
   ngOnInit() {
     this.authService.getCurrentUser().subscribe((user) => {
       if (user && typeof user !== 'boolean') {
-        this.userEmail = user.email || null; 
+        this.userEmail = user.email || null;
       } else {
         this.userEmail = null;
       }
@@ -26,4 +45,3 @@ export class Tab3Page implements OnInit {
     this.authService.signOut();
   }
 }
-

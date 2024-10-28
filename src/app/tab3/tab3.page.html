@@ -7,29 +7,79 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Perfil</ion-title>
+      <ion-title size="large">RSF - Component</ion-title>
     </ion-toolbar>
   </ion-header>
 
   <div class="ion-padding">
 
-    <ion-item lines="none">
-      <ion-label>
-        <h2>Email</h2>
-        <h1>{{ userEmail || 'No disponible' }}</h1>
-      </ion-label>
+    <!-- Elementos de texto -->
+    <h1>reusable-search-filter</h1>
+    <p>
+      Es un Componente de búsqueda y filtro flexible y reutilizable para aplicaciones Angular + Ionic, diseñado para trabajar con cualquier tipo de fuente de datos, ya sea una base de datos externa, datos locales o JSON. Este componente ofrece completas funcionalidades de filtrado, búsqueda, ordenamiento y paginación que se adaptan a los datos que recibe.
+    </p>
+
+
+    <!-- Otros elementos como chips de características y botón de documentación -->
+    <ion-chip color="primary">DataFiltering</ion-chip>
+    <ion-chip color="tertiary">DynamicDataHandling</ion-chip>
+    <ion-chip color="success">ReusableComponent</ion-chip>
+    <ion-chip color="danger">DataPagination</ion-chip>
+    <ion-chip color="warning">PerformanceOptimized</ion-chip>
+
+    <hr>
+
+    <h2>Características</h2>
+    <ion-list>
+      <ion-item>
+        <ion-icon name="search-outline" slot="start" color="primary"></ion-icon>
+        <ion-label>Búsqueda de Texto: Filtra rápidamente elementos por términos de búsqueda específicos.</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="calendar-outline" slot="start" color="success"></ion-icon>
+        <ion-label>Filtrado por Rango de Fechas: Permite filtrar resultados por fechas seleccionadas.</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="options-outline" slot="start" color="warning"></ion-icon>
+        <ion-label>Filtrado por Categoría: Permite seleccionar categorías específicas para reducir los resultados.</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="pricetag-outline" slot="start" color="danger"></ion-icon>
+        <ion-label>Ordenamiento por Precio: Organiza los elementos por precio ascendente o descendente.</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="layers-outline" slot="start" color="tertiary"></ion-icon>
+        <ion-label>Paginación: Controla cuántos elementos se muestran por página.</ion-label>
+      </ion-item>
+    </ion-list>
+
+  <h2>Accesibilidad y Control de Opciones</h2>
+  <ion-list>
+    <ion-item>
+      <ion-icon name="settings-outline" slot="start" color="primary"></ion-icon>
+      <ion-label>Configuración Personalizable: El usuario puede elegir qué filtros habilitar o deshabilitar según sus necesidades.</ion-label>
     </ion-item>
+    <ion-item>
+      <ion-icon name="filter-outline" slot="start" color="danger"></ion-icon>
+      <ion-label>Filtros Opcionales: Permite incluir solo los filtros requeridos (categoría, rango de fechas, etc.), según lo configurado en las props.</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-icon name="chevron-forward-outline" slot="start" color="success"></ion-icon>
+      <ion-label>Control de Paginación: Selecciona la cantidad de elementos por página y navega fácilmente entre páginas.</ion-label>
+    </ion-item>
+  </ion-list>
+
+  <hr>
 
 
     <ion-button expand="block" color="tertiary" href="https://github.com/JulianBerardinelli/reusable-search-filter-component" target="_blank">
       <ion-icon name="logo-github"></ion-icon> 
-       Ver documentación
+      Ver documentación
     </ion-button>
+  </div>
 
-
-    <ion-button expand="block" color="danger" (click)="logout()">
-      <ion-icon name="log-out-outline"></ion-icon>
-      Cerrar sesión
-    </ion-button>
+  <div class="footer">
+    <p>Desarrollado por Julián Berardinelli</p>
+    <p>jberardinelli&#64;nexions.com</p>
   </div>
 </ion-content>

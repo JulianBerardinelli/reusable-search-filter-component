@@ -53,7 +53,15 @@ export class ReusableSearchFilterComponent implements OnInit, OnChanges {
   handleSearch(event: any) {
     // Actualiza texto de búsqueda y aplica filtros
     this.searchText = event.target.value.toLowerCase();
-    this.applyFilters();
+    // Filtra datos según el texto de búsqueda
+    this.filterBySearchText();
+  }
+  filterBySearchText() {
+    this.filteredData = this.data.filter((item) =>
+      item.model?.toLowerCase().includes(this.searchText)
+    );
+    this.currentPage = 1;
+    this.paginate();
   }
 
   async applyFilters() {

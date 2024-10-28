@@ -1,16 +1,42 @@
-<ion-content>
-  <!-- <app-reusable-search-filter 
-  [data]="items" 
-  [categories]="categories"
-  [itemsPerPageOptions]="[5, 10, 20]" 
-  [defaultItemsPerPage]="10"
->
-  <ng-template #itemTemplate let-items>
-    <ion-list>
-      <ion-item *ngFor="let item of items">
-        <ion-label>{{ item.label }}</ion-label>
-      </ion-item>
-    </ion-list>
-  </ng-template>
-</app-reusable-search-filter> -->
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Perfil</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Perfil</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="ion-padding">
+     <!-- Email con icono de menú desplegable -->
+     <ion-item lines="none">
+      <ion-label>
+        <h2 color="light">Email</h2>
+        <h1>{{ userEmail || 'No disponible' }}</h1>
+      </ion-label>
+      <ion-button fill="clear" slot="end" id="open-action-sheet">
+        <ion-icon name="menu-outline"></ion-icon>
+      </ion-button>
+    </ion-item>
+
+    <!-- Action Sheet para cerrar sesión -->
+    <ion-action-sheet 
+      trigger="open-action-sheet"
+      header="Acciones"
+      [buttons]="actionSheetButtons">
+    </ion-action-sheet>
+  </div>
+
+
+
 </ion-content>
+
+<div class="footer-fixed">
+  <p>Desarrollado por Julián Berardinelli</p>
+  <p>jberardinelli&#64;nexions.com</p>
+</div>
+

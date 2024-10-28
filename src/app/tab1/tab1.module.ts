@@ -15,7 +15,7 @@ import { ReusableSearchFilterModule } from '../components/reusable-search-filter
     FormsModule,
     ExploreContainerComponentModule,
     Tab1PageRoutingModule,
-    ReusableSearchFilterModule
+    ReusableSearchFilterModule,
   ],
   declarations: [Tab1Page]
 })
