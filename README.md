@@ -171,4 +171,3 @@ For more advanced usage, such as customizing label texts or modifying the filter
 ## 👥 Contributors
 
 This component was developed by Julián Berardinelli and can be adapted or extended as needed for specific project requirements.
-
