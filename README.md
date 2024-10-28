@@ -1,7 +1,3 @@
-Aquí tienes el README completo y detallado, ideal para la presentación técnica:
-
----
-
 # 🎛️ Reusable Search Filter Component
 
 A powerful, flexible, and reusable search filter component for Angular + Ionic applications, designed to work with any type of data source — be it an external database, local data, or JSON. This component provides rich filtering, searching, sorting, and pagination capabilities that adapt to the data passed into it.
