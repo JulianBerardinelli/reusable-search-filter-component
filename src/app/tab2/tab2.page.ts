@@ -33,9 +33,9 @@ export class Tab2Page implements OnInit {
     console.log('Rangos de fechas de guitarras:', this.guitarDateRanges);
     
     // Verifica cada guitarra y sus propiedades
-    this.guitars.forEach(guitar => {
-      console.log(`Modelo: ${guitar.model}, Marca: ${guitar.brand}, Precio: ${guitar.price}, Material: ${guitar.body_material}, Año: ${guitar.year_of_manufacture}, Número de cuerdas: ${guitar.number_of_strings}, Imagen: ${guitar.photo_url}, Fecha: ${guitar.date_time}`);
-    });
+    // this.guitars.forEach(guitar => {
+    //   console.log(`Modelo: ${guitar.model}, Marca: ${guitar.brand}, Precio: ${guitar.price}, Material: ${guitar.body_material}, Año: ${guitar.year_of_manufacture}, Número de cuerdas: ${guitar.number_of_strings}, Imagen: ${guitar.photo_url}, Fecha: ${guitar.date_time}`);
+    // });
   }
   
   

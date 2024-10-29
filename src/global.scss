@@ -28,6 +28,15 @@
     font-size: 14px;
     color: #6c757d;
   }
+.logo {
+    width: 250px;
+    height: 100px;
+    margin: 0 auto;
+    display: block;
+}
+.span {
+    color: #0054e9;
+}
 
 /* Core CSS required for Ionic components to work properly */
 @import "@ionic/angular/css/core.css";
